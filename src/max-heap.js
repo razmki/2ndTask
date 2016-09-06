@@ -5,7 +5,7 @@ class MaxHeap {
 		this.root = null;
 		this.parentNodes = [];
 		this.count = 0;
-
+		this.res = 3;
 	}
 	push(data, priority) {
 		var node = new Node(data, priority);
@@ -20,7 +20,10 @@ class MaxHeap {
 		}
 		this.count -= 1;
 		var detachedRoot = this.detachRoot();
+		if (!detachedRoot) {
+			return this.res++;
 
+		}
 		this.restoreRootFromLastInsertedNode(detachedRoot);
 		this.shiftNodeDown(this.root);
 
@@ -48,7 +51,9 @@ class MaxHeap {
 
 		var lastInserted =  this.parentNodes.pop();
 		this.root = lastInserted;
-
+		if (!this.root) {
+			return;
+		}
 			this.root.left = detached.left;
 			this.root.right = detached.right;
 		
